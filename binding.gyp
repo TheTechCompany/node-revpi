@@ -9,6 +9,7 @@
 			],
 			"include_dirs": [
 				"src/",
+				"src/binding",
 				"<!@(node -p \"require('node-addon-api').include\")"
 			],
 			"dependencies": [
