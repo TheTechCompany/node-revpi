@@ -215,7 +215,7 @@ char *getModuleName(uint16_t moduletype)
  * Show all devices connected to control process and print their info data
  *
  ************************************************************************************/
-void showDeviceList(void)
+SDeviceInfo[] showDeviceList(void)
 {
 	int devcount;
 	int dev;
@@ -230,34 +230,37 @@ void showDeviceList(void)
 
 	printf("Found %d devices:\n\n", devcount);
 
-	for (dev = 0; dev < devcount; dev++) {
-		// Show device number, address and module type
-		printf("Address: %d module type: %d (0x%x) %s V%d.%d\n", asDevList[dev].i8uAddress,
-		       asDevList[dev].i16uModuleType, asDevList[dev].i16uModuleType,
-		       getModuleName(asDevList[dev].i16uModuleType & PICONTROL_NOT_CONNECTED_MASK),
-		       asDevList[dev].i16uSW_Major, asDevList[dev].i16uSW_Minor);
+//getModuleName(asDevList[dev].i16uModuleType & PICONTROL_NOT_CONNECTED_MASK)
 
-		if (asDevList[dev].i8uActive) {
-			printf("Module is present\n");
-		} else {
-			if (asDevList[dev].i16uModuleType & PICONTROL_NOT_CONNECTED) {
-				printf("Module is NOT present, data is NOT available!!!\n");
-			} else {
-				printf("Module is present, but NOT CONFIGURED!!!\n");
-			}
-		}
+	// for (dev = 0; dev < devcount; dev++) {
+	// 	// Show device number, address and module type
+	// 	printf("Address: %d module type: %d (0x%x) %s V%d.%d\n", asDevList[dev].i8uAddress,
+	// 	       asDevList[dev].i16uModuleType, asDevList[dev].i16uModuleType,
+	// 	       getModuleName(asDevList[dev].i16uModuleType & PICONTROL_NOT_CONNECTED_MASK),
+	// 	       asDevList[dev].i16uSW_Major, asDevList[dev].i16uSW_Minor);
 
-		// Show offset and length of input section in process image
-		printf("     input offset: %d length: %d\n", asDevList[dev].i16uInputOffset,
-		       asDevList[dev].i16uInputLength);
+	// 	if (asDevList[dev].i8uActive) {
+	// 		printf("Module is present\n");
+	// 	} else {
+	// 		if (asDevList[dev].i16uModuleType & PICONTROL_NOT_CONNECTED) {
+	// 			printf("Module is NOT present, data is NOT available!!!\n");
+	// 		} else {
+	// 			printf("Module is present, but NOT CONFIGURED!!!\n");
+	// 		}
+	// 	}
 
-		// Show offset and length of output section in process image
-		printf("    output offset: %d length: %d\n", asDevList[dev].i16uOutputOffset,
-		       asDevList[dev].i16uOutputLength);
-		printf("\n");
-	}
+	// 	// Show offset and length of input section in process image
+	// 	printf("     input offset: %d length: %d\n", asDevList[dev].i16uInputOffset,
+	// 	       asDevList[dev].i16uInputLength);
 
-	piShowLastMessage();
+	// 	// Show offset and length of output section in process image
+	// 	printf("    output offset: %d length: %d\n", asDevList[dev].i16uOutputOffset,
+	// 	       asDevList[dev].i16uOutputLength);
+	// 	printf("\n");
+	// }
+
+	// piShowLastMessage();
+	return asDevList;
 }
 
 /***********************************************************************************/

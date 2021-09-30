@@ -24,6 +24,23 @@ Napi::String Method(const Napi::CallbackInfo& info) {
             return Napi::String::New(env, "world");
 }
 
+Napi::Object ShowDeviceList(const Napi::CallbackInfo& info){
+    Napi::Env env = info.Env();
+	Napi::Array device_list = Napi::Array::New(env);
+
+	SDeviceInfo[] devices = showDeviceList();
+
+	int devCount = piControlGetDeviceInfoList(devices);
+	for(int dev = 0; dev < devices.length; dev++){
+		char *name = getModuleName(devices[dev].i16uModuleType & PICONTROL_NOT_CONNECTED_MASK)
+		Napi::Object obj = Napi::Object::New(env);
+		obj.Set(Napi::String::New(env, "name"), name);
+
+		device_list.Set(Napi::Number::new(env, dev), obj);
+	} 
+
+}
+
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
           exports.Set(Napi::String::New(env, "HelloWorld"),
                                         Napi::Function::New(env, Method));
