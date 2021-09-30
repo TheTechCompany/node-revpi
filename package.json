@@ -1,5 +1,5 @@
 {
-  "name": "node-revpi",
+  "name": "@revpi/node",
   "version": "1.0.0",
   "description": "",
   "main": "lib/binding.js",
