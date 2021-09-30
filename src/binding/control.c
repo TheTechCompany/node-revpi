@@ -215,7 +215,7 @@ char *getModuleName(uint16_t moduletype)
  * Show all devices connected to control process and print their info data
  *
  ************************************************************************************/
-SDeviceInfo[] showDeviceList(void)
+SDeviceInfo *showDeviceList(void)
 {
 	int devcount;
 	int dev;

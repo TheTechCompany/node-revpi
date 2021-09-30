@@ -16,7 +16,7 @@
 using namespace Napi;
 
 extern "C" {
-	SDeviceInfo[] showDeviceList();
+	SDeviceInfo *showDeviceList();
 	char *getModuleName(uint16_t moduletype);
 
 }
@@ -30,7 +30,7 @@ Napi::Object ShowDeviceList(const Napi::CallbackInfo& info){
     Napi::Env env = info.Env();
 	Napi::Array device_list = Napi::Array::New(env);
 
-	SDeviceInfo devices[REV_PI_DEV_CNT_MAX] = showDeviceList();
+	SDeviceInfo *devices = showDeviceList();
 
 	int devCount = piControlGetDeviceInfoList(devices);
 	for(int dev = 0; dev < devCount; dev++){
@@ -45,6 +45,7 @@ Napi::Object ShowDeviceList(const Napi::CallbackInfo& info){
 }
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
+	exports.Set(Napi::String::New(env, "getDeviceList"), Napi::Function::New(env, ShowDeviceList));
           exports.Set(Napi::String::New(env, "HelloWorld"),
                                         Napi::Function::New(env, Method));
             return exports;
