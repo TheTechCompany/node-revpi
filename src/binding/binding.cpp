@@ -10,7 +10,7 @@
 #include <time.h>
 #include <sys/types.h>
 #include <stdbool.h>
-
+#include "control.h"
 #include "../piTest/piControlIf.h"
 #include "../piControl.h"
 using namespace Napi;

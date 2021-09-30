@@ -4,7 +4,8 @@
 			"target_name": "native",
 			"sources": [
 				"src/binding/binding.cpp",
-				"src/piTest/piControlIf.c"
+				"src/piTest/piControlIf.c",
+				"src/binding/control.c"
 			],
 			"include_dirs": [
 				"src/",
