@@ -41,8 +41,8 @@
 #include <sys/types.h>
 #include <stdbool.h>
 #include "control.h"
-#include "piControlIf.h"
-#include "piControl.h"
+#include "../piTest/piControlIf.h"
+#include "../piControl.h"
 
 /***********************************************************************************/
 /*!
