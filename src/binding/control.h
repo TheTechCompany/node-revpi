@@ -1,2 +1,4 @@
 
-void showDeviceList();
+extern "C" {
+	void showDeviceList();
+}
