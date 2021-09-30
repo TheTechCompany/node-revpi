@@ -1,37 +1,55 @@
-ifeq ($(CC),)
-	CC = gcc
-endif
 
-IDIR =.
-CFLAGS += -I. -I.. -std=c11
+#CC=/usr/bin/arm-linux-gnueabihf-gcc
 
-ODIR = obj
+obj-m   := piControl.o
 
-_DEPS = ../piControl.h piControlIf.h
-DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+#add other objects e.g. test.o
+piControl-objs  = piControlMain.o
+piControl-objs += piIOComm.o
+piControl-objs += piDIOComm.o
+piControl-objs += piAIOComm.o
+piControl-objs += RevPiDevice.o
+piControl-objs += json.o
+piControl-objs += piConfig.o
+piControl-objs += RS485FwuCommand.o
+piControl-objs += piFirmwareUpdate.o
+piControl-objs += PiBridgeMaster.o
+piControl-objs += kbUtilities.o
+piControl-objs += systick.o
+piControl-objs += revpi_common.o
+piControl-objs += revpi_compact.o
+piControl-objs += revpi_core.o
+piControl-objs += revpi_gate.o
+piControl-objs += revpi_flat.o
+piControl-objs += pt100.o
+piControl-objs += revpi_mio.o
 
-_OBJ = piTest.o piControlIf.o
-OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+ccflags-y := -O2
+ccflags-$(_ACPI_DEBUG) += -DACPI_DEBUG_OUTPUT
 
-$(ODIR)/%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+#KDIR    := /home/md/pi/kernelbakery/kbuild7
+KBUILD_CFLAGS += -g
 
-piTest: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+PWD   	:= $(shell pwd)
 
-.PHONY: install clean
+EXTRA_CFLAGS = -I$(src)/
 
-install:
-	install -m 755 -d	$(DESTDIR)/usr/bin
-	install -m 755 piTest	$(DESTDIR)/usr/bin
-	ln -sf piTest		$(DESTDIR)/usr/bin/piControlReset
-	install -m 755 -d	$(DESTDIR)/usr/share/man/man1
-	install -m 644 piTest.1	$(DESTDIR)/usr/share/man/man1
-	if [ -e ../picontrol_ioctl.4 ] ; then				\
-		install -m 755 -d $(DESTDIR)/usr/share/man/man4	;	\
-		install -m 644 ../picontrol_ioctl.4			\
-			$(DESTDIR)/usr/share/man/man4 ;			\
-	fi
+EXTRA_CFLAGS += -D__KUNBUSPI_KERNEL__
+
+CROSS_COMPILE += arm-linux-gnueabihf-
+
+.PHONY: compiletime.h
+
+all: compiletime.h
+	$(MAKE) ARCH=arm CROSS_COMPILE="$(CROSS_COMPILE)" -C $(KDIR) M=$(PWD)  modules
+
+compiletime.h:
+	echo "#define COMPILETIME \""`date`"\"" > compiletime.h
 
 clean:
-	rm -f $(ODIR)/*.o piTest
+	$(MAKE) ARCH=arm -C $(KDIR) M=$(PWD) clean
+	rm -f $(piControl-objs)
+
+
+
+
