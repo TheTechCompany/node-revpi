@@ -20,11 +20,6 @@ extern "C" {
 	char *getModuleName(uint16_t moduletype);
 
 }
-Napi::String Method(const Napi::CallbackInfo& info) {
-          Napi::Env env = info.Env();
-          showDeviceList();
-            return Napi::String::New(env, "world");
-}
 
 Napi::Array ShowDeviceList(const Napi::CallbackInfo& info){
     Napi::Env env = info.Env();
@@ -50,7 +45,6 @@ Napi::Array ShowDeviceList(const Napi::CallbackInfo& info){
 		obj.Set(Napi::String::New(env, "name"), getModuleName(asDevList[dev].i16uModuleType & PICONTROL_NOT_CONNECTED_MASK));
 
 		device_list.Set(Napi::Number::New(env, dev), obj);
-
 	 }
 
 	return device_list;
@@ -58,10 +52,8 @@ Napi::Array ShowDeviceList(const Napi::CallbackInfo& info){
 }
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
-	exports.Set(Napi::String::New(env, "getDeviceList"), Napi::Function::New(env, ShowDeviceList));
-          exports.Set(Napi::String::New(env, "HelloWorld"),
-                                        Napi::Function::New(env, Method));
-            return exports;
+	exports.Set(Napi::String::New(env, "getDeviceList"), Napi::Function::New(env, ShowDeviceList));        
+    return exports;
 }
 
 NODE_API_MODULE(addon, Init)
