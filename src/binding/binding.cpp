@@ -11,8 +11,8 @@
 #include <sys/types.h>
 #include <stdbool.h>
 
-#include "piControlIf.h"
-#include "piControl.h"
+#include "../piTest/piControlIf.h"
+#include "../piTest/piControl.h"
 using namespace Napi;
 
 Napi::String Method(const Napi::CallbackInfo& info) {
