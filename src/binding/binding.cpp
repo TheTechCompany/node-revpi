@@ -51,7 +51,6 @@ Napi::Array ShowDeviceList(const Napi::CallbackInfo& info){
 
 		device_list.Set(Napi::Number::New(env, dev), obj);
 
-		printf("Address: %d module type: %d (0x%x) %s V%d.%d\n", asDevList[dev].i8uAddress,
 	 }
 
 	return device_list
