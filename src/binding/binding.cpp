@@ -53,7 +53,7 @@ Napi::Array ShowDeviceList(const Napi::CallbackInfo& info){
 
 	 }
 
-	return device_list
+	return device_list;
 
 }
 
