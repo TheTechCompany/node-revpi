@@ -32,11 +32,12 @@ Napi::Object ShowDeviceList(const Napi::CallbackInfo& info){
 
 	int devCount = piControlGetDeviceInfoList(devices);
 	for(int dev = 0; dev < devices.length; dev++){
-		char *name = getModuleName(devices[dev].i16uModuleType & PICONTROL_NOT_CONNECTED_MASK)
+		char *name = getModuleName(devices[dev].i16uModuleType & PICONTROL_NOT_CONNECTED_MASK);
+		
 		Napi::Object obj = Napi::Object::New(env);
 		obj.Set(Napi::String::New(env, "name"), name);
 
-		device_list.Set(Napi::Number::new(env, dev), obj);
+		device_list.Set(Napi::Number::New(env, dev), obj);
 	} 
 
 }
