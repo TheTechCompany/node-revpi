@@ -17,7 +17,7 @@ using namespace Napi;
 
 extern "C" {
 	SDeviceInfo[] showDeviceList();
-	char *getModuleName(uint16_t moduletype)
+	char *getModuleName(uint16_t moduletype);
 
 }
 Napi::String Method(const Napi::CallbackInfo& info) {
