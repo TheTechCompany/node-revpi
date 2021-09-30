@@ -26,21 +26,35 @@ Napi::String Method(const Napi::CallbackInfo& info) {
             return Napi::String::New(env, "world");
 }
 
-Napi::Object ShowDeviceList(const Napi::CallbackInfo& info){
+Napi::Array ShowDeviceList(const Napi::CallbackInfo& info){
     Napi::Env env = info.Env();
 	Napi::Array device_list = Napi::Array::New(env);
 
-	SDeviceInfo *devices = showDeviceList();
+	int devcount;
+	int dev;
+	SDeviceInfo asDevList[REV_PI_DEV_CNT_MAX];
 
-	int devCount = piControlGetDeviceInfoList(devices);
-	for(int dev = 0; dev < devCount; dev++){
-		char *name = getModuleName(devices[dev].i16uModuleType & PICONTROL_NOT_CONNECTED_MASK);
+	// Get device info
+	devcount = piControlGetDeviceInfoList(asDevList);
 
+	if (devcount < 0) {
+		printf("Cannot retrieve device list: %s\n", strerror(-devcount));
+		return device_list;
+	}
+
+	printf("Found %d devices:\n\n", devcount);
+
+	 for (dev = 0; dev < devcount; dev++) {
+	// 	// Show device number, address and module type
 		Napi::Object obj = Napi::Object::New(env);
-		obj.Set(Napi::String::New(env, "name"), name);
+		obj.Set(Napi::String::New(env, "name"), getModuleName(asDevList[dev].i16uModuleType & PICONTROL_NOT_CONNECTED_MASK));
 
 		device_list.Set(Napi::Number::New(env, dev), obj);
-	} 
+
+		printf("Address: %d module type: %d (0x%x) %s V%d.%d\n", asDevList[dev].i8uAddress,
+	 }
+
+	return device_list
 
 }
 
