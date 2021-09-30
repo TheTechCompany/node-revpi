@@ -7,7 +7,7 @@
 				"src/piTest/piControlIf.c"
 			],
 			"include_dirs": [
-				"../",
+				"src/",
 				"<!@(node -p \"require('node-addon-api').include\")"
 			],
 			"dependencies": [
