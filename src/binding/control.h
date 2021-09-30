@@ -1,4 +1,4 @@
 
 extern "C" {
-	void showDeviceList();
-}
+	void showDeviceList(void);
+};
