@@ -12,7 +12,7 @@
 #include <stdbool.h>
 
 #include "../piTest/piControlIf.h"
-#include "../piTest/piControl.h"
+#include "../piControl.h"
 using namespace Napi;
 
 Napi::String Method(const Napi::CallbackInfo& info) {
