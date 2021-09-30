@@ -15,7 +15,9 @@
 #include "../piControl.h"
 using namespace Napi;
 
-
+extern "C" {
+	void showDeviceList();
+}
 Napi::String Method(const Napi::CallbackInfo& info) {
           Napi::Env env = info.Env();
           showDeviceList();
