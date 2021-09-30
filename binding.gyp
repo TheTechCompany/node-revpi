@@ -1,4 +1,3 @@
-"binding.gyp" 
 {
 	"targets": [
 		{
