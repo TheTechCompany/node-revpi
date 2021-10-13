@@ -17,6 +17,8 @@ using namespace Napi;
 
 extern "C" {
 	uint8_t *readVariableValue(char *pszVariableName, bool cyclic, char format, bool quiet);
+	void writeVariableValue(char *pszVariableName, uint32_t i32uValue);
+
 	SDeviceInfo *showDeviceList();
 	char *getModuleName(uint16_t moduletype);
 
@@ -59,25 +61,30 @@ Napi::Value readValue(const Napi::CallbackInfo& info){
 
 	char* var = const_cast<char*>(variableName.c_str());
 
-	printf(var);
-
 	uint8_t* val = readVariableValue(var, false, 'd', false);
-    
-	printf("%d", val);
 
 	int int_val = (int) val;
-	// double double_val = (double)val[0];
-
-	// memcpy(&double_val, val, sizeof(val));
 
 	Napi::Value value = Napi::Number::New(env, int_val);
 	return value;
+}
+
+void writeValue(const Napi::CallbackInfo& info){
+	Napi::Env env = info.Env();
+
+	std::string variableName = info[0].ToString().Utf8Value();
+	std::uint32_t value = info[1].As<Number>().Uint32Value();
+
+	char* var = const_cast<char*>(variableName.c_str());
+
+	writeVariableValue(var, value);
 }
 
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
 	exports.Set(Napi::String::New(env, "getDeviceList"), Napi::Function::New(env, ShowDeviceList));        
     exports.Set(Napi::String::New(env, "readValue"), Napi::Function::New(env, readValue));
+	exports.Set(Napi::String::New(env, "writeValue"), Napi::Function::New(env, writeValue));
 	return exports;
 }
 
