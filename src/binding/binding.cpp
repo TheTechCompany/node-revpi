@@ -71,7 +71,8 @@ Napi::Value readValue(const Napi::CallbackInfo& info){
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
 	exports.Set(Napi::String::New(env, "getDeviceList"), Napi::Function::New(env, ShowDeviceList));        
-    return exports;
+    exports.Set(Napi::String::New(env, "readValue"), Napi::Function::New(env, readValue));
+	return exports;
 }
 
 NODE_API_MODULE(addon, Init)
