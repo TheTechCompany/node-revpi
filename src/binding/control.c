@@ -365,7 +365,7 @@ uint8_t readVariableValue(char *pszVariableName, bool cyclic, char format, bool 
 			if (rc < 0)
 				printf("Get bit error\n");
 			else {
-				return sPiValue.i8uValue;
+				return sPIValue.i8uValue;
 
 				// if (!quiet)
 				// 	printf("Bit value: %d\n", sPIValue.i8uValue);
