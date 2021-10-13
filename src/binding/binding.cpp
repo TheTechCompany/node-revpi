@@ -54,7 +54,7 @@ Napi::Array ShowDeviceList(const Napi::CallbackInfo& info){
 Napi::Value readValue(const Napi::CallbackInfo& info){
     Napi::Env env = info.Env();
 
-	Napi::Value variableName = info[0].As<String>;
+	Napi::Value variableName = info[0].As<Value>;
 
 	Napi::Value value = Napi::Value::Value(env, readVariableValue(variableName, false, 'd', false));
 	return value;
