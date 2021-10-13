@@ -6,3 +6,5 @@ compiletime.h
 modules.order
 piControl.ko
 piControl.mod.c
+dist/
+build/

@@ -341,7 +341,7 @@ void readData(uint16_t offset, uint16_t length, bool cyclic, char format, bool q
  * @param[in]   Variable name
  *
  ************************************************************************************/
-void readVariableValue(char *pszVariableName, bool cyclic, char format, bool quiet)
+uint8_t readVariableValue(char *pszVariableName, bool cyclic, char format, bool quiet)
 {
 	int rc;
 	SPIVariable sPiVariable;
@@ -365,10 +365,12 @@ void readVariableValue(char *pszVariableName, bool cyclic, char format, bool qui
 			if (rc < 0)
 				printf("Get bit error\n");
 			else {
-				if (!quiet)
-					printf("Bit value: %d\n", sPIValue.i8uValue);
-				else
-					printf("%d\n", sPIValue.i8uValue);
+				return sPiValue.i8uValue;
+
+				// if (!quiet)
+				// 	printf("Bit value: %d\n", sPIValue.i8uValue);
+				// else
+				// 	printf("%d\n", sPIValue.i8uValue);
 			}
 			if (cyclic)
 				sleep(1);
