@@ -57,7 +57,7 @@ Napi::Value readValue(const Napi::CallbackInfo& info){
 
 	std::string variableName = info[0].ToString().Utf8Value();
 
-	char* var = variableName.c_str();
+	char* var = const_cast<char*>(variableName.c_str());
 
 	Napi::Value value = Napi::Number::New(env, readVariableValue(var, false, 'd', false));
 	return value;
