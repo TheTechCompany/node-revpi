@@ -66,7 +66,7 @@ Napi::Value readValue(const Napi::CallbackInfo& info){
 
 	// memcpy(&double_val, val, sizeof(val));
 
-	Napi::Value value = Napi::Number::New(env, 0.0);
+	Napi::Value value = Napi::Number::New(env, double_val);
 	return value;
 }
 
