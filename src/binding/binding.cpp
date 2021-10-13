@@ -59,9 +59,9 @@ Napi::Value readValue(const Napi::CallbackInfo& info){
 
 	char* var = const_cast<char*>(variableName.c_str());
 
-	uint8_t value = readVariableValue(var, false, 'd', false)
+	uint8_t* value = readVariableValue(var, false, 'd', false)
 
-	Napi::Value value = Napi::Number::New(env, (double)value );
+	Napi::Value value = Napi::Number::New(env, (double)value);
 	return value;
 }
 
