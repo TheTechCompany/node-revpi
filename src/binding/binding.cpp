@@ -55,7 +55,7 @@ Napi::Array ShowDeviceList(const Napi::CallbackInfo& info){
 Napi::Value readValue(const Napi::CallbackInfo& info){
     Napi::Env env = info.Env();
 
-	Napi::String variableName = info[0].ToString().Utf8Value();
+	std::string variableName = info[0].ToString().Utf8Value();
 
 	const char* var = variableName.c_str();
 
