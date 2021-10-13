@@ -1,6 +1,6 @@
 {
   "name": "@revpi/node",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "dist/binding.js",
   "gypfile": true,
