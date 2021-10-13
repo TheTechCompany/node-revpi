@@ -16,6 +16,7 @@
 using namespace Napi;
 
 extern "C" {
+	uint8_t *readVariableValue(char *pszVariableName, bool cyclic, char format, bool quiet);
 	SDeviceInfo *showDeviceList();
 	char *getModuleName(uint16_t moduletype);
 
@@ -54,9 +55,9 @@ Napi::Array ShowDeviceList(const Napi::CallbackInfo& info){
 Napi::Value readValue(const Napi::CallbackInfo& info){
     Napi::Env env = info.Env();
 
-	Napi::Value variableName = info[0].As<Value>;
+	Napi::Value variableName = info[0].As<Napi::Value>;
 
-	Napi::Value value = Napi::Value::Value(env, readVariableValue(variableName, false, 'd', false));
+	Napi::Value value = Napi::Number::New(env, readVariableValue(variableName, false, 'd', false));
 	return value;
 }
 
