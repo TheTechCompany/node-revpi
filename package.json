@@ -1,9 +1,17 @@
 {
   "name": "@revpi/node",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
-  "main": "lib/binding.js",
+  "main": "dist/binding.js",
   "gypfile": true,
+  "files": [
+    "src/",
+    "dist/",
+    "binding.gyp"
+  ],
+  "bin": {
+    "revpi-cli": "./dist/cli.js"
+  },
   "scripts": {
     "build": "tsc -b",
     "test": "echo \"Error: no test specified\" && exit 1"
