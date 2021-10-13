@@ -16,7 +16,7 @@ export class RevPi {
 		return native.readValue(variableName)
 	}
 
-	writeValue(){
-
+	writeValue(variableName: string, value: number){
+		return native.writeValue(variableName, value);
 	}
 }
