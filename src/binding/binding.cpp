@@ -61,7 +61,7 @@ Napi::Value readValue(const Napi::CallbackInfo& info){
 
 	uint8_t* val = readVariableValue(var, false, 'd', false);
 
-	Napi::Value value = Napi::Number::New(env, (double)val);
+	Napi::Value value = Napi::Number::New(env, (double)val[0]);
 	return value;
 }
 
