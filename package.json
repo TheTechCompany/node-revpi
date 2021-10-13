@@ -1,6 +1,6 @@
 {
   "name": "@revpi/node",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/binding.js",
   "gypfile": true,
@@ -32,10 +32,12 @@
   },
   "homepage": "https://github.com/balbatross/node-revpi#readme",
   "dependencies": {
-    "node-addon-api": "^4.2.0"
+    "node-addon-api": "^4.2.0",
+    "yargs": "^17.2.1"
   },
   "devDependencies": {
     "@types/node": "^16.10.8",
+    "@types/yargs": "^17.0.3",
     "typescript": "^4.4.4"
   }
 }
