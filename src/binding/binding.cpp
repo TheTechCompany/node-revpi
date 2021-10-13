@@ -60,9 +60,9 @@ Napi::Value readValue(const Napi::CallbackInfo& info){
 	char* var = const_cast<char*>(variableName.c_str());
 
 	printf(var);
-	
+
 	uint8_t* val = readVariableValue(var, false, 'd', false);
-	// double double_val;
+    double double_val = (double)val[0];
 
 	// memcpy(&double_val, val, sizeof(val));
 
