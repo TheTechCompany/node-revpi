@@ -8,3 +8,4 @@ piControl.ko
 piControl.mod.c
 dist/
 build/
+node_modules/
