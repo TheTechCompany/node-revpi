@@ -46,7 +46,7 @@ Napi::Array ShowDeviceList(const Napi::CallbackInfo& info){
 	// 	// Show device number, address and module type
 		Napi::Object obj = Napi::Object::New(env);
 		obj.Set(Napi::String::New(env, "name"), getModuleName(asDevList[dev].i16uModuleType & PICONTROL_NOT_CONNECTED_MASK));
-		obj.Set(Napi::Number::New(env, "address"), asDevList[dev].i8uAddress);
+		obj.Set(Napi::String::New(env, "address"), asDevList[dev].i8uAddress);
 
 		device_list.Set(Napi::Number::New(env, dev), obj);
 	 }
