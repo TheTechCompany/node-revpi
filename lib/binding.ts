@@ -7,7 +7,8 @@ export class RevPi {
 	}
 
 	getDeviceList() : {
-		name: string
+		name: string;
+		address: number;
 	}[] {
 		return native.getDeviceList()
 	}
