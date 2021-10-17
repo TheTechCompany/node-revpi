@@ -29,7 +29,7 @@ const parser = yargs(hideBin(process.argv))
 	}else if(argv.r && !argv.w && !argv.d){
 		const val = pi.readValue(argv.r);
 		console.log(`${argv.r}: ${val}`);
-	}else if(argv.w && argv.v && !argv.d && !argv.r){
+	}else if(argv.w && argv.v != undefined && !argv.d && !argv.r){
 		pi.writeValue(argv.w, argv.v);
 		console.log(`Wrote ${argv.w}: ${argv.v}`)
 	}
