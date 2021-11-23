@@ -225,7 +225,7 @@ SDeviceInfo *showDeviceList(void)
 	devcount = piControlGetDeviceInfoList(asDevList);
 	if (devcount < 0) {
 		printf("Cannot retrieve device list: %s\n", strerror(-devcount));
-		return;
+		return asDevList;
 	}
 
 	printf("Found %d devices:\n\n", devcount);
@@ -354,7 +354,7 @@ uint8_t readVariableValue(char *pszVariableName, bool cyclic, char format, bool 
 	rc = piControlGetVariableInfo(&sPiVariable);
 	if (rc < 0) {
 		printf("Cannot find variable '%s'\n", pszVariableName);
-		return;
+		return -1;
 	}
 	if (sPiVariable.i16uLength == 1) {
 		sPIValue.i16uAddress = sPiVariable.i16uAddress;
